@@ -19,7 +19,7 @@ import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
 
-class PurchaseOrder extends Component {
+class CompanyList extends Component {
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -28,16 +28,17 @@ class PurchaseOrder extends Component {
         }
     }    
 
-    componentWillMount(){
-        this.props.screenProps.getPurchaseOrder(this.props.token,this.props.selectedCompany)
+    componentDidMount(){
+        this.props.getCompanyList(this.props.token,this.props.user)
         .then(() => this.setState({
-            listInput: this.state.listInput.cloneWithRows(this.props.purchaseOrderList)
+            listInput: this.state.listInput.cloneWithRows(this.props.companylist)
         }))
 
     }
 
     onPress(id){
-        alert(id)
+        this.props.selectCompany(this.props.token,id)
+        .then(() => this.props.navigation.navigate('Dashboard'))
     }
 
     renderRow(list, sectionId, rowId, hightlightRow){
@@ -45,12 +46,10 @@ class PurchaseOrder extends Component {
             <TouchableHighlight onPress={() => {this.onPress(list.id)}} >
                 <ListItem
                     key={list.id} 
-                    title={<Text style={styles.titleCart}>{list.date}</Text>}
+                    title={<Text style={styles.titleCart}>{list.name}</Text>}
                     hideChevron={true}
                     subtitle={
-                        <View>
-                            <Text> {list.purchase_no} </Text>
-                        </View>
+                        <Text> {list.data} </Text>
                     }
                 />
             </TouchableHighlight>
@@ -58,16 +57,21 @@ class PurchaseOrder extends Component {
     }
 
     render(){
+        const {params} = this.props.navigation.state;
+        const list = params ? params.list : null;
         return (
             <SafeAreaView style={styles.mainContainer}>
-                    {header('Purchase Order')}
+                    {header()}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
+                        <Text style={styles.dataTitle}>Companies</Text>
+                        <TouchableHighlight onPress={() => {this.props.navigation.navigate('Dashboard', {list: this.state.listInput})}} >
                             <View style={styles.dataSquare}>
                                 <List>
                                     <ListView dataSource={this.state.listInput} 
                                                 renderRow={this.renderRow.bind(this)}/>
                                 </List>
                             </View>
+                        </TouchableHighlight>
                     </ScrollView>
             </SafeAreaView>
         )
@@ -78,8 +82,7 @@ function mapStateToProps(state) {
 	return {
         user: state.User,
         token: state.Token,
-        selectedCompany: state.SelectedCompany,
-        purchaseOrderList: state.PurchaseOrderList,
+        companylist: state.CompanyList
 	}
 }
 
@@ -87,4 +90,4 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PurchaseOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyList);

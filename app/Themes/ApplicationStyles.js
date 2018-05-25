@@ -12,6 +12,14 @@ const ApplicationStyles = {
       backgroundColor: Colors.background,
       paddingHorizontal : 10,
     },
+    drawerContainer: {
+      flex: 1,
+      paddingHorizontal : 10,
+    },
+    drawerTitle: {
+      fontWeight: 'bold', 
+      fontSize: 13, 
+    },
     backgroundImage: {
       position: 'absolute',
       top: 0,
@@ -52,7 +60,6 @@ const ApplicationStyles = {
     dataSquare: {
       backgroundColor: 'white',
       opacity: 0.80,
-      height: 400,
       width: '100%',
       display: 'flex',
       justifyContent: 'flex-start',

@@ -8,11 +8,13 @@ import { createStackNavigator,
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import DrawerStack from '../navigation/DrawerStack';
+import CompanyList from '../components/CompanyList/CompanyList'
 import Logout from '../components/Logout/Logout'
 
 const AppMainStack = createStackNavigator(
 	{
-        DrawerStack: DrawerStack,
+		Company_List: CompanyList,
+		DrawerStack: DrawerStack,
 	},{
 		initialRouteName : 'DrawerStack',
 		headerMode : 'none',
@@ -33,7 +35,7 @@ class AppStack extends Component {
 }
 function mapStateToProps(state) {
 	return {
-		
+		selectedCompany: state.SelectedCompany
 	}
 }
 

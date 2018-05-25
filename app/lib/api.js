@@ -3,14 +3,15 @@
 // const baseUrl = 'http://192.168.2.122:8000/';
 // const baseUrl = 'http://192.168.2.121:8000/'; //YAHSHUA-2G
 // const baseUrl = 'http://192.168.2.124:8000/'; //YAHSHUA-2G
-const baseUrl = 'https://www.yahshuabooksonline.com/api/';
+//const baseUrl = 'https://www.yahshuabooksonline.com/api/';
+const baseUrl = 'http://192.168.2.109/api/'
 
 class Api {
 	static headers(token) {
 		if (token){
 			return {
 				'Accept': 'application/json',
-				'Authorization' : 'JWT ' + token,
+				'Authorization' : 'Token ' + token,
 				'Content-type': 'application/json',
 				'dataType': 'json',
 				'X-Requested-With': 'XMLHttpRequest',

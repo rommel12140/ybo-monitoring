@@ -18,32 +18,6 @@ import { header } from '../Header'
 import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
-const funcDataCreator = (data) => {
-    var string = data
-
-    return string
-}
-
-var string = funcDataCreator('something')
-
-
-var data = [{
-    id: 0,
-    name: 'First',
-    data: string
-},{
-    id: 1,
-    name: 'Second',
-    data: string
-},{
-    id: 2,
-    name: 'Third',
-    data: string
-},{
-    id: 3,
-    name: 'Fourth',
-    data: string
-}]
 
 class Dashboard extends Component {
     constructor(props) {
@@ -51,26 +25,24 @@ class Dashboard extends Component {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             listInput: ds,
-            dataNames: ['data1','data2','data3','data4']
         }
     }    
 
-    componentDidMount(){
-        this.setState({
-            listInput: this.state.listInput.cloneWithRows(data)
-        })
+    componentWillMount(){
+        //this.props.screenProps.getUserCompany(this.props.user,this.props.selectedCompany)
     }
 
     renderRow(list, sectionId, rowId, hightlightRow){
         return(
-            <ListItem
-                key={list.id} 
-                title={<Text style={styles.titleCart}>{list.name}</Text>}
-                hideChevron={true}
-                subtitle={
-                    <Text> {list.data} </Text>
-                }
-            />
+            
+                <ListItem
+                    key={list.id} 
+                    title={<Text style={styles.titleCart}>{list.name}</Text>}
+                    hideChevron={true}
+                    subtitle={
+                        <Text> {list.data} </Text>
+                    }
+                />
         )
     }
 
@@ -79,16 +51,14 @@ class Dashboard extends Component {
             <SafeAreaView style={styles.mainContainer}>
                     {header('Dashboard')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
-                        <Text style={styles.dataTitle}>{this.state.dataNames[0]}</Text>
-                        <TouchableHighlight onPress={() => {this.props.navigation.navigate('DashboardDataView', {list: this.state.listInput, title: this.state.dataNames[0]})}} >
+                        <Text style={styles.dataTitle}>{this.props.selectedCompany.name}</Text>    
                             <View style={styles.dataSquare}>
                                 <List>
                                     <ListView dataSource={this.state.listInput} 
                                                 renderRow={this.renderRow.bind(this)}/>
                                 </List>
                             </View>
-                        </TouchableHighlight>
-                        <Text style={styles.dataTitle}>{this.state.dataNames[1]}</Text>
+                        {/* <Text style={styles.dataTitle}>{this.state.dataNames[1]}</Text>
                         <TouchableHighlight onPress={() => {this.props.navigation.navigate('DashboardDataView', {list: this.state.listInput, title: this.state.dataNames[1]})}} >
                             <View style={styles.dataSquare}>
                                 <List>
@@ -115,7 +85,7 @@ class Dashboard extends Component {
                                             renderRow={this.renderRow.bind(this)}/>
                             </List>
                         </View>
-                        </TouchableHighlight>
+                        </TouchableHighlight> */}
                     </ScrollView>
             </SafeAreaView>
         )
@@ -124,6 +94,9 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
 	return {
+        user: state.User,
+        token: state.Token,
+        selectedCompany: state.SelectedCompany,
 	}
 }
 

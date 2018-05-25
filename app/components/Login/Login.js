@@ -22,7 +22,7 @@ class Login extends Component {
         super(props);
         this.state = {
           //TODO: CHANGE THIS BACK
-          email: 'aldesabido@gmail.com',
+          username: 'aldesabido@gmail.com',
           password: '123',
           loading : false,
         }
@@ -40,7 +40,7 @@ class Login extends Component {
 
     componentWillReceiveProps(nextProps){
         if(nextProps.accept && !nextProps.fail){
-              this.props.navigation.navigate('Dashboard')
+              this.props.navigation.navigate('Company_List')
               this.setState({loading : false});
         }else{
         this.setState({loading : false});
@@ -49,7 +49,7 @@ class Login extends Component {
 
     onChangeUsername(value){
         this.setState({
-            email:value
+            username:value
         });
     }
 
@@ -67,13 +67,13 @@ class Login extends Component {
                         <View style={styles.loginHeader}>
                             <Text style={styles.sectionTitleLogin}>  Login </Text>
                         </View>
-                        <Text style={styles.sectionLogin}>Email</Text>
+                        <Text style={styles.sectionLogin}>Username</Text>
                         <TextInput 
-                            placeholder='email'
+                            placeholder='username/password'
                             keyboardType='email-address'
                             keyboardAppearance='dark'
                             style={styles.textInput}
-                            value={this.state.email}
+                            value={this.state.username}
                             onChangeText={(value) => this.onChangeUsername(value)}
                             />
                         <Text style={styles.sectionLogin}>Password</Text>

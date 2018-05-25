@@ -2,7 +2,8 @@ import * as types from './types';
 import Api from '../lib/api';
 
 
-const baseUrl = 'https://www.yahshuabooksonline.com/api/';
+//const baseUrl = 'https://www.yahshuabooksonline.com/api/';
+const baseUrl = 'http://192.168.2.109/api/'
 
 export function resetAuthToken() {
 	return (dispatch, getState) => {
@@ -11,27 +12,90 @@ export function resetAuthToken() {
 }
 
 export function getAuthToken(data) {
-	console.log("LOGIN WAS PRESSED");
+	console.log("======================================================================");
+	console.log("========================LOGIN WAS PRESSED=============================");
+	console.log("======================================================================");
 	return (dispatch, getState) => {
 		dispatch(setFail({value : false}));
-		return fetch(baseUrl+'api-auth/', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({data})
-		})
+		return Api.post('api-auth/', data)
 		.then((response) => {
-			console.log("authenticated!\n");
+			console.log('==========================================='+JSON.stringify(response));
+			dispatch(setToken({ token: response.token}))
+			dispatch(setUser({ user: response.user}))
 			dispatch(setAccepted({ value : true }));
 			dispatch(setFail({ value : false }));
 		})
 		.catch((ex) => {
 			alert(ex);
 			dispatch(setAccepted({ value : false }));
-			dispatch(setFail({ value : true }));
+			dispatch(setFail({ value : true })); 
 			console.log(JSON.stringify(ex));
+		})
+	}
+}
+
+export function getCompanyList(token,user){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'user-company-list/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Token ' + token,
+			},
+			body: JSON.stringify({
+				user
+			})
+		})
+		.then((response) => response.json())
+		.then((response) => {
+			console.log(response)
+			dispatch(setCompanyList({ companyList: response }));
+		})
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+}
+
+export function selectCompany(token,companyID){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'select-company/'+companyID+'/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Token ' + token,
+			},
+		})
+		.then((response) => response.json())
+		.then((response) => {
+			console.log(response)
+			dispatch(setSelectedCompany({ selectedCompany: response }));
+		})
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+}
+
+export function getPurchaseOrder(token,company){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'read_purchase_order/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Token ' + token,
+			},
+		})
+		.then((response) => response.json())
+		.then((response) => {
+			console.log(response)
+			dispatch(setPurchaseOrderList({ purchaseOrderList: response }));
+		})
+		.catch((error) => {
+			console.log(error)
 		})
 	}
 }
@@ -40,6 +104,27 @@ export function setAccepted( { value } ) {
 	return {
 		type: types.SET_ACCEPTED,
 		value
+	}
+}
+
+export function setSelectedCompany( { selectedCompany } ) {
+	return {
+		type: types.SET_SELECTED_COMPANY,
+		selectedCompany
+	}
+}
+
+export function setCompanyList( { companyList } ) {
+	return {
+		type: types.SET_COMPANY_LIST,
+		companyList
+	}
+}
+
+export function setPurchaseOrderList( { purchaseOrderList } ) {
+	return {
+		type: types.SET_PURCHASE_ORDER_LIST,
+		purchaseOrderList
 	}
 }
 
@@ -55,6 +140,21 @@ export function resetState() {
 		type: types.RESET_STATE
 	}
 }
+
+export function setToken( { token } ) {
+	return {
+		type: types.SET_TOKEN,
+		token
+	}
+}
+
+export function setUser( { user } ) {
+	return {
+		type: types.SET_USER,
+		user
+	}
+}
+
 /*
 export function getCartID(token,user){
 	return (dispatch,getState) => {
@@ -240,20 +340,6 @@ export function setCreateCart( { create } ) {
 	return {
 		type: types.SET_CREATE_CART,
 		create
-	}
-}
-
-export function setToken( { token } ) {
-	return {
-		type: types.SET_TOKEN,
-		token
-	}
-}
-
-export function setUser( { user } ) {
-	return {
-		type: types.SET_USER,
-		user
 	}
 }
 

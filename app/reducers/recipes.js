@@ -14,6 +14,30 @@ export const AuthCheck = createReducer(false,{
 	},
 })
 
+export const Token = createReducer("", {
+	[types.SET_TOKEN](state , action){
+		return action.token; 
+	},
+})
+
+export const SelectedCompany = createReducer({}, {
+	[types.SET_SELECTED_COMPANY](state , action){
+		return action.selectedCompany; 
+	}
+})
+
+export const CompanyList = createReducer({}, {
+	[types.SET_COMPANY_LIST](state , action){
+		return action.companyList; 
+	}
+})
+
+export const PurchaseOrderList = createReducer({}, {
+	[types.SET_PURCHASE_ORDER_LIST](state , action){
+		return action.purchaseOrderList; 
+	}
+})
+
 export const User = createReducer({},{
 	[types.SET_USER](state, action){
 		return action.user;
@@ -51,15 +75,6 @@ export const setEmployeeCarts = createReducer({}, {
 			}
 		})
 		return results;
-	}
-})
-
-export const Token = createReducer("", {
-	[types.SET_TOKEN](state , action){
-		return action.token; 
-	},
-	[types.RESET_TOKEN](state , action){
-		return ''; 
 	}
 })
 
