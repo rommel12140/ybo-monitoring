@@ -52,12 +52,6 @@ class Dashboard extends Component {
                     {header('Dashboard')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
                         <Text style={styles.dataTitle}>{this.props.selectedCompany.name}</Text>    
-                            <View style={styles.dataSquare}>
-                                <List>
-                                    <ListView dataSource={this.state.listInput} 
-                                                renderRow={this.renderRow.bind(this)}/>
-                                </List>
-                            </View>
                         {/* <Text style={styles.dataTitle}>{this.state.dataNames[1]}</Text>
                         <TouchableHighlight onPress={() => {this.props.navigation.navigate('DashboardDataView', {list: this.state.listInput, title: this.state.dataNames[1]})}} >
                             <View style={styles.dataSquare}>
