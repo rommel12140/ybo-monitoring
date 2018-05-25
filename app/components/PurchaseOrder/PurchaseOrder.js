@@ -36,13 +36,13 @@ class PurchaseOrder extends Component {
 
     }
 
-    onPress(id){
-        alert(id)
+    onPress(list){
+        this.props.navigation.navigate('PurchaseOrderDataView', {list: list.purchase_order_details})
     }
 
     renderRow(list, sectionId, rowId, hightlightRow){
         return(
-            <TouchableHighlight onPress={() => {this.onPress(list.id)}} >
+            <TouchableHighlight onPress={() => {this.onPress(list)}} >
                 <ListItem
                     key={list.id} 
                     title={<Text style={styles.titleCart}>{list.date}</Text>}
