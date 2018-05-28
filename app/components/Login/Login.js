@@ -33,9 +33,18 @@ class Login extends Component {
         this.props.resetAuthToken()
     }
 
+    _onLoadingLimit(){
+        if(this.state.loading===true){
+            setTimeout(() => {
+                alert('There seems to be a problem with your connection')
+            }, 20000)
+        }
+    }
+
     onSubmit(){
         this.setState({loading:true})
         this.props.getAuthToken(this.state)
+        this._onLoadingLimit()
     }
 
     componentWillReceiveProps(nextProps){

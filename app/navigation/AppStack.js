@@ -35,7 +35,8 @@ class AppStack extends Component {
 }
 function mapStateToProps(state) {
 	return {
-		selectedCompany: state.SelectedCompany
+		selectedCompany: state.SelectedCompany,
+		user: state.User
 	}
 }
 
