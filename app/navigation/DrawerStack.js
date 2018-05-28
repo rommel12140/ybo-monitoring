@@ -26,10 +26,13 @@ const navigatorConfig = {
 				<Divider />
 				<Button title="Switch Company" 
 						color= 'black'
-						onPress={() => props.navigation.navigate('Company_List')}/>
+						onPress={() => {
+							props.navigation.navigate('Company_List')
+						}}/>
 				<Button title="Logout" 
 						color= 'black'
-						onPress={() => props.navigation.navigate('Login')}/>
+						onPress={() => props.navigation.navigate('Login')
+						}/>
 			</View>
         </View>
 	)

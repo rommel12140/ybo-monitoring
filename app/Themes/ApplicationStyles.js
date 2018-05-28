@@ -70,6 +70,15 @@ const ApplicationStyles = {
       fontSize: 20,
       textAlign: 'center',
     },
+    dashboardSquare: {
+      backgroundColor: 'white',
+      opacity: 0.80,
+      height: 600,
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'flex-start',
+      padding: 10,
+    },
     screenSquare: {
       backgroundColor: 'gray',
       opacity: 0.80,
