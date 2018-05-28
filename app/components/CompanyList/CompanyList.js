@@ -46,11 +46,8 @@ class CompanyList extends Component {
             <TouchableHighlight onPress={() => {this.onPress(list.id)}} >
                 <ListItem
                     key={list.id} 
-                    title={<Text style={styles.titleCart}>{list.name}</Text>}
+                    title={<Text>{list.name}</Text>}
                     hideChevron={true}
-                    subtitle={
-                        <Text> {list.data} </Text>
-                    }
                 />
             </TouchableHighlight>
         )
