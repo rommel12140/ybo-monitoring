@@ -70,6 +70,17 @@ const ApplicationStyles = {
       fontSize: 20,
       textAlign: 'center',
     },
+    screenSquare: {
+      backgroundColor: 'gray',
+      opacity: 0.80,
+      height: 150,
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'flex-start',
+      padding: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     centered: {
       alignItems: 'center'
     },

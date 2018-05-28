@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, Button, SafeAreaView } from 'react-native';
+import { Text, View, Button, SafeAreaView, List } from 'react-native';
 import { createDrawerNavigator, DrawerItems } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import { Icon, Divider } from 'react-native-elements';
 import styles from '../Themes/Styles'
 import CompanyList from '../components/CompanyList/CompanyList'
 import DashboardStack from '../navigation/DashboardStack';
@@ -18,8 +18,10 @@ const navigatorConfig = {
             <SafeAreaView  style={{flex: 1}} forceInset={{ top: 'always', horizontal: 'never' }}>
 				<View>
 					<Text style={styles.drawerTitle}> {props.screenProps.selectedCompany.name} </Text>
+					<Divider />
 					<DrawerItems {...props} />
 				</View>
+				<Divider />
             </SafeAreaView>
 			<View style={{marginBottom: 40}}>
 				<Button title="Switch Company" style={{color: 'black'}} onPress={() => props.navigation.navigate('Company_List')}/>

@@ -2,18 +2,18 @@ import React from 'react';
 import { Icon } from 'react-native-elements';
 import { withNavigation, NavigationActions } from 'react-navigation';
 
-class Drawer extends React.Component {
+class Back extends React.Component {
   render() {
     return (<Icon 
-                name='bars'
+                name='arrow-left'
                 raised
                 color= 'black' 
                 type='font-awesome' 
-                title="Drawer" 
-                onPress={() => { this.props.navigation.toggleDrawer() }} 
+                title="Back" 
+                onPress={() => { this.props.navigation.goBack() }} 
                 />
     )
   }
 }
 
-export default withNavigation(Drawer);
+export default withNavigation(Back);

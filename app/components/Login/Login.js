@@ -39,9 +39,10 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(nextProps){
+        
         if(nextProps.accept && !nextProps.fail){
-              this.props.navigation.navigate('Company_List')
-              this.setState({loading : false});
+            this.props.navigation.navigate('Company_List')
+            this.setState({loading : false});
         }else{
         this.setState({loading : false});
         }

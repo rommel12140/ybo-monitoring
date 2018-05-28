@@ -32,9 +32,21 @@ export const CompanyList = createReducer({}, {
 	}
 })
 
-export const PurchaseOrderList = createReducer({}, {
-	[types.SET_PURCHASE_ORDER_LIST](state , action){
-		return action.purchaseOrderList; 
+export const ReadPurchaseOrderList = createReducer({}, {
+	[types.SET_READ_PURCHASE_ORDER_LIST](state , action){
+		return action.readPurchaseOrderList; 
+	}
+})
+
+export const ReadReceiveInventoryList = createReducer({}, {
+	[types.SET_READ_RECEIVE_INVENTORY_LIST](state , action){
+		return action.readReceiveInventoryList; 
+	}
+})
+
+export const ReadPayBillsList = createReducer({}, {
+	[types.SET_READ_PAY_BILLS_LIST](state , action){
+		return action.readPayBillsList; 
 	}
 })
 

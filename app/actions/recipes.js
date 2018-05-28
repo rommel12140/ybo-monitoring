@@ -2,8 +2,8 @@ import * as types from './types';
 import Api from '../lib/api';
 
 
-//const baseUrl = 'https://www.yahshuabooksonline.com/api/';
-const baseUrl = 'http://192.168.2.109/api/'
+const baseUrl = 'https://www.yahshuabooksonline.com/api/';
+//const baseUrl = 'http://192.168.2.109/api/'
 
 export function resetAuthToken() {
 	return (dispatch, getState) => {
@@ -12,14 +12,10 @@ export function resetAuthToken() {
 }
 
 export function getAuthToken(data) {
-	console.log("======================================================================");
-	console.log("========================LOGIN WAS PRESSED=============================");
-	console.log("======================================================================");
 	return (dispatch, getState) => {
 		dispatch(setFail({value : false}));
 		return Api.post('api-auth/', data)
 		.then((response) => {
-			console.log('==========================================='+JSON.stringify(response));
 			dispatch(setToken({ token: response.token}))
 			dispatch(setUser({ user: response.user}))
 			dispatch(setAccepted({ value : true }));
@@ -79,7 +75,7 @@ export function selectCompany(token,companyID){
 	}
 }
 
-export function getPurchaseOrder(token,company){
+export function getReadPurchaseOrder(token,company){
 	return (dispatch,getState) => {
 		return fetch(baseUrl+'read_purchase_order/', {
 			method: 'POST',
@@ -92,7 +88,49 @@ export function getPurchaseOrder(token,company){
 		.then((response) => response.json())
 		.then((response) => {
 			console.log(response)
-			dispatch(setPurchaseOrderList({ purchaseOrderList: response }));
+			dispatch(setReadPurchaseOrderList({ readPurchaseOrderList: response }));
+		})
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+}
+
+export function getReadReceiveInventory(token,company){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'read_receive_inventory/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Token ' + token,
+			},
+		})
+		.then((response) => response.json())
+		.then((response) => {
+			console.log(response)
+			dispatch(setReadReceiveInventoryList({ readReceiveInventoryList: response }));
+		})
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+}
+
+export function getReadPayBills(token,company){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'read_receive_inventory/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Token ' + token,
+			},
+		})
+		.then((response) => response.json())
+		.then((response) => {
+			console.log(response)
+			dispatch(setReadPayBillsList({ readPayBillsList: response }));
 		})
 		.catch((error) => {
 			console.log(error)
@@ -121,10 +159,24 @@ export function setCompanyList( { companyList } ) {
 	}
 }
 
-export function setPurchaseOrderList( { purchaseOrderList } ) {
+export function setReadPurchaseOrderList( { readPurchaseOrderList } ) {
 	return {
-		type: types.SET_PURCHASE_ORDER_LIST,
-		purchaseOrderList
+		type: types.SET_READ_PURCHASE_ORDER_LIST,
+		readPurchaseOrderList
+	}
+}
+
+export function setReadReceiveInventoryList( { readReceiveInventoryList } ) {
+	return {
+		type: types.SET_READ_RECEIVE_INVENTORY_LIST,
+		readReceiveInventoryList
+	}
+}
+
+export function setReadPayBillsList( { readPayBillsList } ) {
+	return {
+		type: types.SET_READ_PAY_BILLS_LIST,
+		readPayBillsList
 	}
 }
 
