@@ -24,8 +24,13 @@ const navigatorConfig = {
 				<Divider />
             </SafeAreaView>
 			<View style={{marginBottom: 40}}>
-				<Button title="Switch Company" style={{color: 'black'}} onPress={() => props.navigation.navigate('Company_List')}/>
-				<Button title="Logout" onPress={() => props.navigation.navigate('Login')}/>
+				<Divider />
+				<Button title="Switch Company" 
+						color= 'black'
+						onPress={() => props.navigation.navigate('Company_List')}/>
+				<Button title="Logout" 
+						color= 'black'
+						onPress={() => props.navigation.navigate('Login')}/>
 			</View>
         </View>
 	)

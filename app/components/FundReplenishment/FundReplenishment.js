@@ -31,7 +31,6 @@ export default class FundReplenishment extends Component {
                                     color= 'white' 
                                     type='font-awesome' 
                                     title="Drawer" 
-                                    onPress={() => { this.props.navigation.toggleDrawer() }} 
                                     />
                              <Text style={styles.dataTitle}> Read Purchase Order </Text>
                             </View>
@@ -45,7 +44,6 @@ export default class FundReplenishment extends Component {
                                     color= 'white' 
                                     type='font-awesome' 
                                     title="Drawer" 
-                                    onPress={() => { this.props.navigation.toggleDrawer() }} 
                                     />
                                 <Text style={styles.dataTitle}> Read Receive Inventory </Text>
                             </View>
@@ -59,7 +57,6 @@ export default class FundReplenishment extends Component {
                                     color= 'white' 
                                     type='font-awesome' 
                                     title="Drawer" 
-                                    onPress={() => { this.props.navigation.toggleDrawer() }} 
                                     />
                                 <Text style={styles.dataTitle}> Read Pay Bills </Text>
                             </View>
