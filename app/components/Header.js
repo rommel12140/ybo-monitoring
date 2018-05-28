@@ -40,9 +40,6 @@ export const headerWithBack = (title, subtitle) => {
             <View>
                 <Back />
             </View>
-            <View>
-                <Drawer />
-            </View>
         </View>
         )
     }
