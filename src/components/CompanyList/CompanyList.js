@@ -12,7 +12,7 @@ import {
   } from 'react-native'
 import { Icon, List, ListItem } from 'react-native-elements'
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../../actions';
+import { ActionCreators } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { header } from '../Header'
 import styles from '../../Themes/Styles'
@@ -28,6 +28,9 @@ class CompanyList extends Component {
         }
     }    
 
+    //before the module mounts, it calls getCompanyList
+    // in action recipes to get all Company List 
+    //of the user then cloneWith rows to the datasource
     componentDidMount(){
         this.props.getCompanyList(this.props.token,this.props.user)
         .then(() => this.setState({
@@ -36,6 +39,8 @@ class CompanyList extends Component {
 
     }
 
+    //after press, call selectCompany then navigate
+    //to dashboard
     onPress(id){
         this.props.selectCompany(this.props.token,id)
         .then(() => this.props.navigation.navigate('Dashboard'))
@@ -54,8 +59,6 @@ class CompanyList extends Component {
     }
 
     render(){
-        const {params} = this.props.navigation.state;
-        const list = params ? params.list : null;
         return (
             <SafeAreaView style={styles.mainContainer}>
                     {header()}
@@ -75,6 +78,8 @@ class CompanyList extends Component {
     }
 }
 
+//redux
+//get user, token, company list stored on redux
 function mapStateToProps(state) {
 	return {
         user: state.User,
@@ -88,3 +93,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompanyList);
+//redux

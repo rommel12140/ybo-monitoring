@@ -3,6 +3,7 @@ import { Text, View, Button, SafeAreaView, List } from 'react-native';
 import { createDrawerNavigator, DrawerItems } from 'react-navigation';
 import { Icon, Divider } from 'react-native-elements';
 import styles from '../Themes/Styles'
+//Navigation Stacks
 import CompanyList from '../components/CompanyList/CompanyList'
 import DashboardStack from '../navigation/DashboardStack';
 import PurchaseOrderStack from '../navigation/PurchaseOrderStack';
@@ -10,7 +11,7 @@ import SalesOrderStack from '../navigation/SalesOrderStack';
 import FundReplenishmentStack from '../navigation/FundReplenishmentStack';
 
 
-  
+//contentComponent to style the drawer however you want
 const navigatorConfig = {
 	contentComponent:(props) => (
         <View style={styles.drawerContainer}>
@@ -38,7 +39,7 @@ const navigatorConfig = {
 	)
 };
   
-
+//Drawer screens that navigate to other stack navigation
 const DrawerStack = createDrawerNavigator(
 	{	
 		Dashboard: {screen: DashboardStack, 

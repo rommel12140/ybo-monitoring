@@ -13,8 +13,9 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from 'react-native-elements';
 import styles from '../../Themes/Styles';
+//redux import
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../../actions';
+import { ActionCreators } from '../../redux/actions';
 import { connect } from 'react-redux';
   
 class Login extends Component {
@@ -28,11 +29,14 @@ class Login extends Component {
         }
       }
 
+    //Everytime the login component is called, resetAuthToken from action recipes is called
+    // to reset redux
     componentWillMount(){
         this.setState({loading:false})
         this.props.resetAuthToken()
     }
 
+    //to notify the user that loading took too long
     _onLoadingLimit(){
         if(this.state.loading===true){
             setTimeout(() => {
@@ -41,12 +45,16 @@ class Login extends Component {
         }
     }
 
+    //upon submission, loading will start and will call getAuthToken
+    //from action recipes and passes the state
     onSubmit(){
         this.setState({loading:true})
         this.props.getAuthToken(this.state)
         this._onLoadingLimit()
     }
 
+    //after receiving props from redux, this function is called and will control
+    //wether the user is accepted or not
     componentWillReceiveProps(nextProps){
         
         if(nextProps.accept && !nextProps.fail){
@@ -57,18 +65,22 @@ class Login extends Component {
         }
     }
 
+    //every letter entered on username, the state is changed
     onChangeUsername(value){
         this.setState({
             username:value
         });
     }
 
+    //every letter entered on password, the state is changed
     onChangePassword(value){
         this.setState({
                 password:value
         });
     }
 
+    //SafeAreaView to fit screen on phone view
+    //KeyboardAwareScroll view to have movable contents
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
@@ -108,6 +120,9 @@ class Login extends Component {
     }
 }
 
+//use redux to pass AuthAccept and AuthCheck to props
+//use the redux props to check if the user is accepted
+//redux
 function mapStateToProps(state) {
 	return {
     accept : state.AuthAccept,
@@ -120,3 +135,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+//redux

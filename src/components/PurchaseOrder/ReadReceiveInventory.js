@@ -13,14 +13,14 @@ import {
   } from 'react-native'
 import { Icon, List, ListItem } from 'react-native-elements'
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../../actions';
+import { ActionCreators } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { headerWithBack } from '../Header'
 import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
 
-class ReadPayBills extends Component {
+class ReadReceiveInventory extends Component {
     constructor(props) {
         super(props);
         //const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -35,10 +35,10 @@ class ReadPayBills extends Component {
     }
 
     makeRemoteRequest = () => {
-        this.props.screenProps.getReadPayBills(this.props.token,this.props.selectedCompany)
+        this.props.screenProps.getReadReceiveInventory(this.props.token,this.props.selectedCompany)
         .then(() => {
             this.setState({
-            listInput: this.props.readPayBillsList
+            listInput: this.props.receiveInventoryList
             })
             console.log(this.state.listInput)
         })
@@ -80,7 +80,7 @@ class ReadPayBills extends Component {
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                    {headerWithBack('Purchase Order', 'Read Pay Bills')}
+                    {headerWithBack('Purchase Order', 'Read Receive Inventory')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
                             <View style={styles.dataSquare}>
                                 <List>
@@ -101,7 +101,7 @@ function mapStateToProps(state) {
         user: state.User,
         token: state.Token,
         selectedCompany: state.SelectedCompany,
-        readPayBillsList: state.ReadPayBillsList
+        receiveInventoryList: state.ReadReceiveInventoryList
 	}
 }
 
@@ -109,4 +109,4 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReadPayBills);
+export default connect(mapStateToProps, mapDispatchToProps)(ReadReceiveInventory);

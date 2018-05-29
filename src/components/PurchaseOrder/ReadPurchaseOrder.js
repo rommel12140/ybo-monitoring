@@ -13,14 +13,14 @@ import {
   } from 'react-native'
 import { Icon, List, ListItem } from 'react-native-elements'
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../../actions';
+import { ActionCreators } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { headerWithBack } from '../Header'
 import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
 
-class ReadPayBills extends Component {
+class ReadPurchaseOrder extends Component {
     constructor(props) {
         super(props);
         //const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -35,10 +35,10 @@ class ReadPayBills extends Component {
     }
 
     makeRemoteRequest = () => {
-        this.props.screenProps.getReadPayBills(this.props.token,this.props.selectedCompany)
+        this.props.screenProps.getReadPurchaseOrder(this.props.token,this.props.selectedCompany)
         .then(() => {
             this.setState({
-            listInput: this.props.readPayBillsList
+            listInput: this.props.purchaseOrderList
             })
             console.log(this.state.listInput)
         })
@@ -46,7 +46,7 @@ class ReadPayBills extends Component {
 
 
     onPress(data){
-        this.props.navigation.navigate('ReadReceiveInventoryDataView', {data: data})
+        this.props.navigation.navigate('ReadPurchaseOrderDataView', {data: data})
     }
 
     renderItem = (lists) => {
@@ -56,7 +56,7 @@ class ReadPayBills extends Component {
             <TouchableHighlight onPress={() => {this.onPress(list)}} >
                 <ListItem
                     key={list.id} 
-                    title={<Text style={styles.titleCart}>{list.receive_no}</Text>}
+                    title={<Text style={styles.titleCart}>{list.purchase_no}</Text>}
                     hideChevron={true}
                     subtitle={
                         <View style={{flexDirection: 'row'}}>
@@ -80,7 +80,7 @@ class ReadPayBills extends Component {
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                    {headerWithBack('Fund Replenishment', 'Read Pay Bills')}
+                    {headerWithBack('Purchase Order', 'Read Purchase Order')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
                             <View style={styles.dataSquare}>
                                 <List>
@@ -101,7 +101,7 @@ function mapStateToProps(state) {
         user: state.User,
         token: state.Token,
         selectedCompany: state.SelectedCompany,
-        readPayBillsList: state.ReadPayBillsList
+        purchaseOrderList: state.ReadPurchaseOrderList,
 	}
 }
 
@@ -109,4 +109,4 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReadPayBills);
+export default connect(mapStateToProps, mapDispatchToProps)(ReadPurchaseOrder);

@@ -10,6 +10,7 @@ import {
     TouchableHighlight,
   } from 'react-native'
 import { Icon, List, ListItem, Button, Divider } from 'react-native-elements'
+//import header function to be used
 import { header } from '../Header'
 import styles from '../../Themes/Styles'
   
@@ -18,6 +19,7 @@ export default class FundReplenishment extends Component {
         super(props);
     }    
 
+    //render navigation of screens from stack
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>

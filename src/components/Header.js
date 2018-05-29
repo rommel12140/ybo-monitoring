@@ -12,7 +12,9 @@ import Back from './BackButton'
 import Logout from './Logout/Logout'
 
 
-//HEADER CAUSES CRASH ON NAVIGATION BECAUSE OF UPDATE EVERY SCREEN
+//HEADER MAY CAUSE THE PROGRAM TO CRASH ON NAVIGATION BECAUSE OF UPDATE EVERY SCREEN
+//header functions to be passed on every component
+//requires title or title and subtitle
 export const header = (title) => {
     if(title){
         return (

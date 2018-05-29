@@ -13,38 +13,40 @@ import {
   } from 'react-native'
 import { Icon, List, ListItem } from 'react-native-elements'
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../../actions';
+import { ActionCreators } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { headerWithBack } from '../Header'
 import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
 
-class ReadReceiveInventory extends Component {
+class ReadPayBills extends Component {
+    //instead of using datasource listview, the state is using array
+    //for Flast List View
     constructor(props) {
         super(props);
-        //const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             listInput: [],
             data: []
         }
     }    
 
+    //after component mounts, call getReadPayBills in action recipes
     componentWillMount(){
         this.makeRemoteRequest()
     }
 
     makeRemoteRequest = () => {
-        this.props.screenProps.getReadReceiveInventory(this.props.token,this.props.selectedCompany)
+        this.props.screenProps.getReadPayBills(this.props.token,this.props.selectedCompany)
         .then(() => {
             this.setState({
-            listInput: this.props.receiveInventoryList
+            listInput: this.props.readPayBillsList
             })
             console.log(this.state.listInput)
         })
     }
 
-
+    //When data is pressed, navigate to data view
     onPress(data){
         this.props.navigation.navigate('ReadReceiveInventoryDataView', {data: data})
     }
@@ -80,7 +82,7 @@ class ReadReceiveInventory extends Component {
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                    {headerWithBack('Fund Replenishment', 'Read Receive Inventory')}
+                    {headerWithBack('Fund Replenishment', 'Read Pay Bills')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
                             <View style={styles.dataSquare}>
                                 <List>
@@ -96,12 +98,13 @@ class ReadReceiveInventory extends Component {
     }
 }
 
+//redux
 function mapStateToProps(state) {
 	return {
         user: state.User,
         token: state.Token,
         selectedCompany: state.SelectedCompany,
-        receiveInventoryList: state.ReadReceiveInventoryList
+        readPayBillsList: state.ReadPayBillsList
 	}
 }
 
@@ -109,4 +112,5 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReadReceiveInventory);
+export default connect(mapStateToProps, mapDispatchToProps)(ReadPayBills);
+//redux

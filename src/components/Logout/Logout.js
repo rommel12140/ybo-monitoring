@@ -2,6 +2,8 @@ import React from 'react';
 import { Icon } from 'react-native-elements';
 import { withNavigation, NavigationActions } from 'react-navigation';
 
+//TO BE DELETED
+//NOT USED
 class Logout extends React.Component {
   
   render() {
