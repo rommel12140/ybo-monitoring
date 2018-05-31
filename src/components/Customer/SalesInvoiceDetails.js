@@ -15,7 +15,7 @@ import { headerWithBack } from '../Header'
 import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
-export default class ReadReceiveInventoryDataView extends Component {
+export default class SalesInvoiceDetails extends Component {
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -32,14 +32,14 @@ export default class ReadReceiveInventoryDataView extends Component {
         this.setState({
             dataInput: data,
             //listInput: data.purchase_order_details,
-            listInput: this.state.listInput.cloneWithRows(data.receive_inventory_details)
+            listInput: this.state.listInput.cloneWithRows(data.purchase_order_details)
         })
     }
 
     itemDetails(data){
         return(
             <View>
-                <Text style={styles.titleCart}>{data.receive_no}</Text>
+                <Text style={styles.titleCart}>{data.purchase_no}</Text>
                 <Text>Date: {data.date} </Text>
                 <Text>Reference No.: {data.reference_no} </Text>
                 <List>
@@ -72,7 +72,7 @@ export default class ReadReceiveInventoryDataView extends Component {
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                {headerWithBack('Purchase Order','Read Receive Inventory' )}
+                {headerWithBack('Customer', 'Sales Invoice')}
                 <View style={styles.dataSquare}>
                     {this.itemDetails(this.state.dataInput)}
                 </View>

@@ -48,7 +48,7 @@ class ReadPayBills extends Component {
 
     //When data is pressed, navigate to data view
     onPress(data){
-        this.props.navigation.navigate('ReadReceiveInventoryDataView', {data: data})
+        this.props.navigation.navigate('OpenDetails', {data: data})
     }
 
     renderItem = (lists) => {
@@ -82,7 +82,7 @@ class ReadPayBills extends Component {
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                    {headerWithBack('Fund Replenishment', 'Read Pay Bills')}
+                    {headerWithBack('Fund Replenishment', 'Open')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
                             <View style={styles.dataSquare}>
                                 <List>

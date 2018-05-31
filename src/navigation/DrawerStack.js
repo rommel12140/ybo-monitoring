@@ -6,8 +6,8 @@ import styles from '../Themes/Styles'
 //Navigation Stacks
 import CompanyList from '../components/CompanyList/CompanyList'
 import DashboardStack from '../navigation/DashboardStack';
-import PurchaseOrderStack from '../navigation/PurchaseOrderStack';
-import SalesOrderStack from '../navigation/SalesOrderStack';
+import SupplierStack from '../navigation/SupplierStack';
+import CustomerStack from '../navigation/CustomerStack';
 import FundReplenishmentStack from '../navigation/FundReplenishmentStack';
 
 
@@ -48,14 +48,14 @@ const DrawerStack = createDrawerNavigator(
 						drawerLabel: 'Home',
 						drawerIcon: (<Icon name="home" type='font-awesome' size={24} />),
 		  			}},
-		PurchaseOrder: {screen: PurchaseOrderStack, 
+		Supplier: {screen: SupplierStack, 
 					navigationOptions: {
-						title: 'Purchase Order',
+						title: 'Supplier',
 						drawerIcon: (<Icon name="shopping-cart" type='font-awesome' size={24} />),
 					}},
-		SalesOrder: {screen: SalesOrderStack, 
+		Customer: {screen: CustomerStack, 
 					navigationOptions: {
-						title: 'Sales Order',
+						title: 'Customer',
 						drawerIcon: (<Icon name="dollar" type='font-awesome' size={24} />),
 					}},
 		FundReplenishment: {screen: FundReplenishmentStack, 

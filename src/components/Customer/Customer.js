@@ -10,21 +10,22 @@ import {
     TouchableHighlight,
   } from 'react-native'
 import { Icon, List, ListItem, Button, Divider } from 'react-native-elements'
+//import header function to be used
 import { header } from '../Header'
 import styles from '../../Themes/Styles'
-
-
-export default class PurchaseOrderScreen extends Component {
+  
+export default class FundReplenishment extends Component {
     constructor(props) {
         super(props);
     }    
 
+    //render navigation of screens from stack
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                    {header('Purchase Order')}
+                    {header('Customer')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('ReadPurchaseOrder')}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('SalesOrder')}>
                             <View style={styles.screenSquare}>
                                 <Icon 
                                     name='truck'
@@ -33,11 +34,11 @@ export default class PurchaseOrderScreen extends Component {
                                     type='font-awesome' 
                                     title="Drawer" 
                                     />
-                             <Text style={styles.dataTitle}> Read Purchase Order </Text>
+                             <Text style={styles.dataTitle}> Sales Order </Text>
                             </View>
                         </TouchableHighlight>
                         <Divider />
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('ReadReceiveInventory')}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('SalesInvoice')}>
                             <View style={styles.screenSquare}>
                                 <Icon 
                                     name='database'
@@ -46,11 +47,11 @@ export default class PurchaseOrderScreen extends Component {
                                     type='font-awesome' 
                                     title="Drawer" 
                                     />
-                                <Text style={styles.dataTitle}> Read Receive Inventory </Text>
+                                <Text style={styles.dataTitle}> Sales Invoice </Text>
                             </View>
                         </TouchableHighlight>
                         <Divider />
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('ReadPayBills')}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('ReceiptsCollections')}>
                             <View style={styles.screenSquare}>
                                 <Icon 
                                     name='credit-card'
@@ -59,7 +60,7 @@ export default class PurchaseOrderScreen extends Component {
                                     type='font-awesome' 
                                     title="Drawer" 
                                     />
-                                <Text style={styles.dataTitle}> Read Pay Bills </Text>
+                                <Text style={styles.dataTitle}> Receipts / Collections </Text>
                             </View>
                         </TouchableHighlight>
                     </ScrollView>

@@ -3,8 +3,8 @@ import * as types from './types';
 import Api from '../lib/api';
 
 
-const baseUrl = 'https://www.yahshuabooksonline.com/api/';
-//const baseUrl = 'http://192.168.2.109/api/'
+//const baseUrl = 'https://www.yahshuabooksonline.com/api/';
+const baseUrl = 'http://192.168.2.117/api/'
 
 
 //api functions to get data and redux functions to dispatch actions
@@ -124,9 +124,9 @@ export function getReadReceiveInventory(token,company){
 }
 
 //function to get the pay bills list
-export function getReadPayBills(token,company){
+export function getReadPayBills(token,body){
 	return (dispatch,getState) => {
-		return fetch(baseUrl+'read_receive_inventory/', {
+		return fetch(baseUrl+'read_pay_bills/', {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -138,6 +138,49 @@ export function getReadPayBills(token,company){
 		.then((response) => {
 			console.log(response)
 			dispatch(setReadPayBillsList({ readPayBillsList: response }));
+		})
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+}
+
+export function getReadFunds(token,body){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'funds/read/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Token ' + token,
+			},
+			body: JSON.stringify(body)
+		})
+		.then((response) => response.json())
+		.then((response) => {
+			dispatch(setFunds({ funds: response }));
+		})
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+}
+
+export function getFundsDetail(token,body){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'funds/generate_request/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Token ' + token,
+			},
+			body: JSON.stringify(body)
+		})
+		.then((response) => response.json())
+		.then((response) => {
+			console.log(response)
+			dispatch(setFundsDetail({ fundsDetail: response }));
 		})
 		.catch((error) => {
 			console.log(error)
@@ -187,6 +230,20 @@ export function setReadPayBillsList( { readPayBillsList } ) {
 	return {
 		type: types.SET_READ_PAY_BILLS_LIST,
 		readPayBillsList
+	}
+}
+
+export function setFunds( { funds } ) {
+	return {
+		type: types.SET_FUNDS,
+		funds
+	}
+}
+
+export function setFundsDetail( { fundsDetail } ) {
+	return {
+		type: types.SET_FUNDS_DETAIL,
+		fundsDetail
 	}
 }
 

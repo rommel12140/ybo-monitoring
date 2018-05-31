@@ -10,12 +10,12 @@ import {
     ListView,
     TouchableHighlight,
   } from 'react-native'
-import { Icon, List, ListItem } from 'react-native-elements'
+import { Icon, List, ListItem, Button } from 'react-native-elements'
 import { headerWithBack } from '../Header'
 import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
-export default class ReadPayBillsDataView extends Component {
+export default class ReadPurchaseOrderDataView extends Component {
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -32,16 +32,23 @@ export default class ReadPayBillsDataView extends Component {
         this.setState({
             dataInput: data,
             //listInput: data.purchase_order_details,
-            listInput: this.state.listInput.cloneWithRows(data.pay_bills_details)
+            listInput: this.state.listInput.cloneWithRows(data.purchase_order_details)
         })
     }
 
     itemDetails(data){
         return(
             <View>
-                <Text style={styles.titleCart}>{data.pay_no}</Text>
-                <Text>Date: {data.date} </Text>
-                <Text>Reference No.: {data.reference_no} </Text>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View>
+                        <Text style={styles.titleCart}>{data.pay_no}</Text>
+                        <Text>Date: {data.date} </Text>
+                        <Text>Reference No.: {data.reference_no} </Text>
+                    </View>
+                    <View>
+                        <Button title='Accept' onPress={() => alert('accepted')} />
+                    </View>
+                </View>
                 <List>
                     <ListView  dataSource={this.state.listInput}
                                 renderRow={this.renderRow.bind(this)}
@@ -72,7 +79,7 @@ export default class ReadPayBillsDataView extends Component {
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                {headerWithBack('Purchase Order', 'Read Pay Bills')}
+                {headerWithBack('Supplier', 'Purchase Order')}
                 <View style={styles.dataSquare}>
                     {this.itemDetails(this.state.dataInput)}
                 </View>

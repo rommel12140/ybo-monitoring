@@ -20,7 +20,7 @@ import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
 
-class ReadReceiveInventory extends Component {
+class SalesInvoice extends Component {
     constructor(props) {
         super(props);
         //const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -35,10 +35,10 @@ class ReadReceiveInventory extends Component {
     }
 
     makeRemoteRequest = () => {
-        this.props.screenProps.getReadReceiveInventory(this.props.token,this.props.selectedCompany)
+        this.props.screenProps.getReadPurchaseOrder(this.props.token,this.props.selectedCompany)
         .then(() => {
             this.setState({
-            listInput: this.props.receiveInventoryList
+            listInput: this.props.purchaseOrderList
             })
             console.log(this.state.listInput)
         })
@@ -46,7 +46,7 @@ class ReadReceiveInventory extends Component {
 
 
     onPress(data){
-        this.props.navigation.navigate('ReadReceiveInventoryDataView', {data: data})
+        this.props.navigation.navigate('SalesInvoiceDetails', {data: data})
     }
 
     renderItem = (lists) => {
@@ -56,7 +56,7 @@ class ReadReceiveInventory extends Component {
             <TouchableHighlight onPress={() => {this.onPress(list)}} >
                 <ListItem
                     key={list.id} 
-                    title={<Text style={styles.titleCart}>{list.receive_no}</Text>}
+                    title={<Text style={styles.titleCart}>{list.purchase_no}</Text>}
                     hideChevron={true}
                     subtitle={
                         <View style={{flexDirection: 'row'}}>
@@ -80,7 +80,7 @@ class ReadReceiveInventory extends Component {
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                    {headerWithBack('Purchase Order', 'Read Receive Inventory')}
+                    {headerWithBack('Customer', 'Sales Invoice')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
                             <View style={styles.dataSquare}>
                                 <List>
@@ -101,7 +101,7 @@ function mapStateToProps(state) {
         user: state.User,
         token: state.Token,
         selectedCompany: state.SelectedCompany,
-        receiveInventoryList: state.ReadReceiveInventoryList
+        purchaseOrderList: state.ReadPurchaseOrderList,
 	}
 }
 
@@ -109,4 +109,4 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReadReceiveInventory);
+export default connect(mapStateToProps, mapDispatchToProps)(SalesInvoice);

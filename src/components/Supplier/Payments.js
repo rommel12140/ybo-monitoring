@@ -20,7 +20,9 @@ import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
 
-class ReadPurchaseOrder extends Component {
+class ReadPayBills extends Component {
+    //instead of using datasource listview, the state is using array
+    //for Flast List View
     constructor(props) {
         super(props);
         //const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -29,24 +31,25 @@ class ReadPurchaseOrder extends Component {
             data: []
         }
     }    
-
+    
+    //after component mounts, call getReadPayBills in action recipes
     componentWillMount(){
         this.makeRemoteRequest()
     }
 
     makeRemoteRequest = () => {
-        this.props.screenProps.getReadPurchaseOrder(this.props.token,this.props.selectedCompany)
+        this.props.screenProps.getReadPayBills(this.props.token,this.props.selectedCompany)
         .then(() => {
             this.setState({
-            listInput: this.props.purchaseOrderList
+            listInput: this.props.readPayBillsList
             })
             console.log(this.state.listInput)
         })
     }
 
-
+    //When data is pressed, navigate to data view
     onPress(data){
-        this.props.navigation.navigate('ReadPurchaseOrderDataView', {data: data})
+        this.props.navigation.navigate('PaymentsDetails', {data: data})
     }
 
     renderItem = (lists) => {
@@ -56,7 +59,7 @@ class ReadPurchaseOrder extends Component {
             <TouchableHighlight onPress={() => {this.onPress(list)}} >
                 <ListItem
                     key={list.id} 
-                    title={<Text style={styles.titleCart}>{list.purchase_no}</Text>}
+                    title={<Text style={styles.titleCart}>{list.receive_no}</Text>}
                     hideChevron={true}
                     subtitle={
                         <View style={{flexDirection: 'row'}}>
@@ -80,7 +83,7 @@ class ReadPurchaseOrder extends Component {
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                    {headerWithBack('Fund Replenishment', 'Read Purchase Order')}
+                    {headerWithBack('Payments', 'Supplier')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
                             <View style={styles.dataSquare}>
                                 <List>
@@ -96,12 +99,13 @@ class ReadPurchaseOrder extends Component {
     }
 }
 
+//redux
 function mapStateToProps(state) {
 	return {
         user: state.User,
         token: state.Token,
         selectedCompany: state.SelectedCompany,
-        purchaseOrderList: state.ReadPurchaseOrderList,
+        readPayBillsList: state.ReadPayBillsList
 	}
 }
 
@@ -109,4 +113,4 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReadPurchaseOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(ReadPayBills);

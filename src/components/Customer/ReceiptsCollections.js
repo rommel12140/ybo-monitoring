@@ -20,7 +20,7 @@ import styles from '../../Themes/Styles'
 import { setTimeout } from 'core-js';
 
 
-class ReadReceiveInventory extends Component {
+class ReceiptsCollections extends Component {
     constructor(props) {
         super(props);
         //const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -46,7 +46,7 @@ class ReadReceiveInventory extends Component {
 
 
     onPress(data){
-        this.props.navigation.navigate('ReadReceiveInventoryDataView', {data: data})
+        this.props.navigation.navigate('ReceiptsCollectionsDetails', {data: data})
     }
 
     renderItem = (lists) => {
@@ -80,7 +80,7 @@ class ReadReceiveInventory extends Component {
     render(){
         return (
             <SafeAreaView style={styles.mainContainer}>
-                    {headerWithBack('Fund Replenishment', 'Read Receive Inventory')}
+                    {headerWithBack('Customer', 'Receipts / Collections')}
                     <ScrollView contentContainerStyle={{paddingRight: 10}}>
                             <View style={styles.dataSquare}>
                                 <List>
@@ -109,4 +109,4 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReadReceiveInventory);
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiptsCollections);

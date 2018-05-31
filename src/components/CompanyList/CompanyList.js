@@ -16,7 +16,6 @@ import { ActionCreators } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { header } from '../Header'
 import styles from '../../Themes/Styles'
-import { setTimeout } from 'core-js';
 
 
 class CompanyList extends Component {

@@ -51,6 +51,18 @@ export const ReadPayBillsList = createReducer({}, {
 	}
 })
 
+export const Funds = createReducer({}, {
+	[types.SET_FUNDS](state , action){
+		return action.funds; 
+	}
+})
+
+export const FundsDetail = createReducer({}, {
+	[types.SET_FUNDS_DETAIL](state , action){
+		return action.fundsDetail; 
+	}
+})
+
 export const User = createReducer({},{
 	[types.SET_USER](state, action){
 		return action.user;
